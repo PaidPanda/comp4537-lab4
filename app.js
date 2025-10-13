@@ -148,8 +148,8 @@ class App {
           } else {
             // generate error message for word not found
             const errorMessage = this.replacePlaceholder(STRINGS.error, {
-              1: requestCount,
-              2: word,
+              requestCount: requestCount,
+              word: word,
             });
             // handle get request word not found in dictionary
             res.writeHead(404);
