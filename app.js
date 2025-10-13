@@ -51,6 +51,9 @@ class App {
 
         // handle POST requests
         if (method === POST) {
+          // increment request count
+          requestCount++;
+
           try {
             const data = JSON.parse(body);
             const word = data.word;
@@ -86,9 +89,6 @@ class App {
               res.end(JSON.stringify({ message: STRINGS.fail }));
             }
 
-            // increment request count
-            requestCount++;
-
             // add new word-definition pair to dictionary
             dictionary.set(word, definition);
 
@@ -104,7 +104,8 @@ class App {
             );
             res.writeHead(200);
             res.end(JSON.stringify({ message: successMessage }));
-          } catch (error) { // handle JSON parsing errors
+          } catch (error) {
+            // handle JSON parsing errors
             res.writeHead(400);
             res.end(JSON.stringify({ message: STRINGS.invalidJSON }));
           }
@@ -114,6 +115,9 @@ class App {
         // handle GET requests
         if (method === GET) {
           const word = query.word;
+
+          // increment request count
+          requestCount++;
 
           // validate the word parameter
           if (
@@ -129,10 +133,6 @@ class App {
 
           // check if the word exists in the dictionary
           if (dictionary.has(word)) {
-
-            // increment request count
-            requestCount++;
-
             // generate successful get message
             const successfulGetMessage = this.replacePlaceholder(
               STRINGS.successGet,
@@ -146,10 +146,15 @@ class App {
             res.writeHead(200);
             res.end(JSON.stringify({ message: successfulGetMessage }));
           } else {
+            // generate error message for word not found
+            const errorMessage = this.replacePlaceholder(STRINGS.error, {
+              1: requestCount,
+              2: word,
+            });
             // handle get request word not found in dictionary
             res.writeHead(404);
             res.end(
-              JSON.stringify({ message: STRINGS.error.replace("{1}", word) })
+              JSON.stringify({ message: errorMessage })
             );
           }
         }
