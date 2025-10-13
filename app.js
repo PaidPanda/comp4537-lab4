@@ -62,21 +62,21 @@ class App {
         // handle POST requests
         if (method === POST) {
           // check if word already exists
-          // if (dictionary.has(word)) {
-          //   res.writeHead(400);
-          //   res.end(JSON.stringify({ message: STRINGS.fail }));
-          // } else {
-          //   // input validation for 'definition'
-          //   if (
-          //     !query.definition ||
-          //     typeof query.definition !== "string" ||
-          //     !isNaN(query.definition) ||
-          //     query.definition.trim() === ""
-          //   ) {
-          //     res.writeHead(400);
-          //     res.end(JSON.stringify({ message: STRINGS.invalidDefinition }));
-          //     return;
-          //   }
+          if (dictionary.has(word)) {
+            res.writeHead(400);
+            res.end(JSON.stringify({ message: STRINGS.fail }));
+          } else {
+            // input validation for 'definition'
+            // if (
+            //   !query.definition ||
+            //   typeof query.definition !== "string" ||
+            //   !isNaN(query.definition) ||
+            //   query.definition.trim() === ""
+            // ) {
+            //   res.writeHead(400);
+            //   res.end(JSON.stringify({ message: STRINGS.invalidDefinition }));
+            //   return;
+            // }
             const definition = query.definition;
             console.log(definition);
 
@@ -139,4 +139,5 @@ class App {
 
 const app = new App(port);
 app.start();
+
 
