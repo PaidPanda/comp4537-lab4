@@ -44,16 +44,16 @@ class App {
         res.setHeader("Content-Type", "application/json");
 
         // input validation for 'word'
-        // if (
-        //   !query.word ||
-        //   typeof query.word !== "string" ||
-        //   !isNaN(query.word) ||
-        //   query.word.trim() === ""
-        // ) {
-        //   res.writeHead(400);
-        //   res.end(JSON.stringify({ message: STRINGS.invalidWord }));
-        //   return;
-        // }
+        if (
+          !query.word ||
+          typeof query.word !== "string" ||
+          !isNaN(query.word) ||
+          query.word.trim() === ""
+        ) {
+          res.writeHead(400);
+          res.end(JSON.stringify({ message: STRINGS.invalidWord }));
+          return;
+        }
         const word = query.word;
 
         console.log(query);
@@ -67,16 +67,16 @@ class App {
             res.end(JSON.stringify({ message: STRINGS.fail }));
           } else {
             // input validation for 'definition'
-            // if (
-            //   !query.definition ||
-            //   typeof query.definition !== "string" ||
-            //   !isNaN(query.definition) ||
-            //   query.definition.trim() === ""
-            // ) {
-            //   res.writeHead(400);
-            //   res.end(JSON.stringify({ message: STRINGS.invalidDefinition }));
-            //   return;
-            // }
+            if (
+              !query.definition ||
+              typeof query.definition !== "string" ||
+              !isNaN(query.definition) ||
+              query.definition.trim() === ""
+            ) {
+              res.writeHead(400);
+              res.end(JSON.stringify({ message: STRINGS.invalidDefinition }));
+              return;
+            }
             const definition = query.definition;
             console.log(definition);
 
@@ -139,5 +139,6 @@ class App {
 
 const app = new App(port);
 app.start();
+
 
 
