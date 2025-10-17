@@ -1,5 +1,5 @@
 const STRINGS = {
-    fail: "Warning! This word already exists in the dictionary. Nothing was added.",
+    fail: "HEY. Warning! This word already exists in the dictionary. Nothing was added.",
     successGet: "Request #${requestCount}, Word: '${word}' - Definition: '${definition}'.",
     successPost: "Request #${requestCount}, New entry recorded: '${word}' : '${definition}'. Total number exisiting entries: ${size}",
     invalidWord: "Invalid input for word. Please provide a non-empty string.",
